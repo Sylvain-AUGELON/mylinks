@@ -3,10 +3,8 @@
 
 function logout()
 {
-    if ()
-    session_destroy();
     $_SESSION= [];
-    var_dump($_SESSION);
+    session_destroy();
     $params = session_get_cookie_params();
     setcookie(
         session_name(),

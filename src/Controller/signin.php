@@ -8,7 +8,7 @@ include '../src/Service/login.php';
 include '../src/Service/bidon.php';
 include '../src/Service/loadUserData.php';
 
-function signin($confirm = false)
+function signin()
 {
 
     $title = "SignIn";
@@ -18,12 +18,12 @@ function signin($confirm = false)
         $hash = md5($form["email"]["value"]);
         $filename = './../vars/' . $hash . '.json';
 
-        if (is_file($filename) && loadUserData($filename,$form["password"]["value"],true)) {
-
+        if (is_file($filename) && loadUserData($filename,$form["password"]["value"])) {
             login();
 
             $_SESSION["userDataFile"] = './../vars/'.$hash."data.json";
-            bidon($_SESSION["userDataFile"],"");
+            bidon($_SESSION["userDataFile"]);
+            $_SESSION['id'] = true;
             redirect("home");
             exit;
 
@@ -32,10 +32,8 @@ function signin($confirm = false)
         } else {
             $form["email"]["error"] = "Utilisateur inconnu, veuillez vous enregistrer";
         }
-
     }
 
     include '../templates/signin.html.php';
 
 }
-?>

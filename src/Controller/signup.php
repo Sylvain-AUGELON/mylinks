@@ -21,7 +21,7 @@ function signup()
                 $hash,
             );
             redirect("signin");
-            exit;
+            exit; 
         }
         $form["email"]["error"] = "Email already exists";
     }
